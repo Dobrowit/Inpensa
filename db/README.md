@@ -6,3 +6,7 @@ Kody CPV oraz CPC:
 
 Wspólny Słownik Zamówień (CPV) stanowi jednolity system klasyfikacji udzielanych zamówień publicznych, którego celem jest standaryzacja terminologii wykorzystywanej przy dokonywaniu opisu przedmiotu zamówienia przez instytucje zamawiające. Obowiązek posługiwania się Słownikiem w procesie opisu przedmiotu zamówienia publicznego wynika bezpośrednio z brzmienia art. 99 ust. 3 ustawy z dnia 11 września 2019 r. – Prawo zamówień publicznych (DZ. U. z 2019 poz. 2019) - https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20190002019
 
+Słowniki województw, powiatów, gmin, miejscowości i ulic wg bazy danych TERYT - https://eteryt.stat.gov.pl/eTeryt/rejestr_teryt/udostepnianie_danych/baza_teryt/uzytkownicy_indywidualni/pobieranie/pliki_pelne.aspx?contrast=default
+- zbiór TERC: nazwa województwa/powiatu/gminy oraz odpowiedni kod wg TERYT
+- zbiór SIMC: nazwa miejscowości oraz odpowiedni kod wg TERYT
+- zbiór ULIC: nazwy/rodzaj ulicy oraz odpowiedni kod wg TERYT

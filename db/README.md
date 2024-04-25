@@ -21,3 +21,8 @@ Zastosowano słowniki województw, powiatów, gmin, miejscowości i ulic wg bazy
 > - zbiór TERC: nazwa województwa/powiatu/gminy oraz odpowiedni kod wg TERYT
 > - zbiór SIMC: nazwa miejscowości oraz odpowiedni kod wg TERYT
 > - zbiór ULIC: nazwy/rodzaj ulicy oraz odpowiedni kod wg TERYT
+
+# Walidacja danych
+## Kody pocztowe
+10 znaków alfanumerycznych. Lista międzynarodowych kodów pocztowych:
+ - https://en.wikipedia.org/wiki/List_of_postal_codes

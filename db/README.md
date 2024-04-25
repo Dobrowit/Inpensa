@@ -26,3 +26,4 @@ Zastosowano słowniki województw, powiatów, gmin, miejscowości i ulic wg bazy
 ## Kody pocztowe
 10 znaków alfanumerycznych. Lista międzynarodowych kodów pocztowych:
  - https://en.wikipedia.org/wiki/List_of_postal_codes
+ - https://www.apaczka.pl/centrum_pomocy/formaty-kodow-pocztowych/

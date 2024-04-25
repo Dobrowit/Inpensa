@@ -509,9 +509,9 @@ ALTER TABLE `uprawnienia`
 -- Indexes for table `uslugi_pod_wydatkiem`
 --
 ALTER TABLE `uslugi_pod_wydatkiem`
-  ADD KEY `kontrahenci_ibfk_1` (`KodCPV`),
-  ADD KEY `kontrahenci_ibfk_2` (`KursEuroWDniu`),
-  ADD KEY `kontrahenci_ibfk_3` (`WydatekId`);
+  ADD KEY `KodCPV` (`KodCPV`),
+  ADD KEY `KursEuroWDniu` (`KursEuroWDniu`),
+  ADD KEY `WydatekId` (`WydatekId`);
 
 --
 -- Indexes for table `uzytkownicy`

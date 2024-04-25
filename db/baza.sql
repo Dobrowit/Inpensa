@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8500
--- Generation Time: Apr 25, 2024 at 08:26 AM
+-- Generation Time: Apr 25, 2024 at 12:09 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -532,7 +532,7 @@ ALTER TABLE `wydatki`
 -- Indexes for table `wydatki_pod_zamowieniem`
 --
 ALTER TABLE `wydatki_pod_zamowieniem`
-  ADD PRIMARY KEY (`ZamowienieId`),
+  ADD KEY `ZamowienieId` (`ZamowienieId`),
   ADD KEY `WydatekId` (`WydatekId`);
 
 --
@@ -543,6 +543,28 @@ ALTER TABLE `zamowienia`
   ADD KEY `WprowadzonePrzez` (`WprowadzonePrzez`),
   ADD KEY `StatusZamowieniaId` (`StatusZamowieniaId`),
   ADD KEY `KursEuroWDniu` (`KursEuroWDniu`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `identyfikatory_kontrahentow`
+--
+ALTER TABLE `identyfikatory_kontrahentow`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unikalny indetyfikator';
+
+--
+-- AUTO_INCREMENT for table `wydatki`
+--
+ALTER TABLE `wydatki`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unikalny identyfikator wydatku';
+
+--
+-- AUTO_INCREMENT for table `zamowienia`
+--
+ALTER TABLE `zamowienia`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unikatowy identyfikator zamówienia';
 
 --
 -- Constraints for dumped tables

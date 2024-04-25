@@ -1,12 +1,23 @@
-Kody krajów wg the ISO 3166-1 zaczerpnięte z rep. https://github.com/stefangabos/world_countries/tree/master
+# Żródła słowników
 
-Kody CPV oraz CPC:
-- źródło Rozporządzenie Komisji WE nr 213/2008 z 28 listopada 2007 r. zmieniającego rozporządzenie (WE) nr 2195/2002 Parlamentu Europejskiego i Rady w sprawie Wspólnego Słownika Zamówień (CPV) oraz dyrektywy 2004/17/WE i 2004/18/WE Parlamentu Europejskiego i Rady dotyczące procedur udzielania zamówień publicznych w zakresie zmiany CPV - https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=celex%3A32008R0213
-- klasyfikacje CPV stosuje się w celu opisu przedmiotu zamówienia od dnia 15 września 2008 r.
+## Kody krajów
+Użyto kody krajów wg normy ISO 3166-1 zaczerpnięte z rep. stefangabos/world_countries:
+ - https://github.com/stefangabos/world_countries/tree/master
 
-Wspólny Słownik Zamówień (CPV) stanowi jednolity system klasyfikacji udzielanych zamówień publicznych, którego celem jest standaryzacja terminologii wykorzystywanej przy dokonywaniu opisu przedmiotu zamówienia przez instytucje zamawiające. Obowiązek posługiwania się Słownikiem w procesie opisu przedmiotu zamówienia publicznego wynika bezpośrednio z brzmienia art. 99 ust. 3 ustawy z dnia 11 września 2019 r. – Prawo zamówień publicznych (DZ. U. z 2019 poz. 2019) - https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20190002019
+## Wspólny Słownik Samówień - CPV
+Podstawa prawna - Rozporządzenie Komisji WE nr 213/2008 z 28 listopada 2007 r. zmieniającego rozporządzenie (WE) nr 2195/2002 Parlamentu Europejskiego i Rady w sprawie Wspólnego Słownika Zamówień (CPV) oraz dyrektywy 2004/17/WE i 2004/18/WE Parlamentu Europejskiego i Rady dotyczące procedur udzielania zamówień publicznych w zakresie zmiany CPV:
+- https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=celex%3A32008R0213
 
-Słowniki województw, powiatów, gmin, miejscowości i ulic wg bazy danych TERYT - https://eteryt.stat.gov.pl/eTeryt/rejestr_teryt/udostepnianie_danych/baza_teryt/uzytkownicy_indywidualni/pobieranie/pliki_pelne.aspx?contrast=default
-- zbiór TERC: nazwa województwa/powiatu/gminy oraz odpowiedni kod wg TERYT
-- zbiór SIMC: nazwa miejscowości oraz odpowiedni kod wg TERYT
-- zbiór ULIC: nazwy/rodzaj ulicy oraz odpowiedni kod wg TERYT
+> [!NOTE]
+> Wspólny Słownik Zamówień (CPV) stanowi jednolity system klasyfikacji udzielanych zamówień publicznych, którego celem jest standaryzacja terminologii wykorzystywanej przy dokonywaniu opisu przedmiotu zamówienia przez instytucje zamawiające.
+> Klasyfikacje CPV stosuje się w celu opisu przedmiotu zamówienia od dnia 15 września 2008 r.
+> Obowiązek posługiwania się Słownikiem w procesie opisu przedmiotu zamówienia publicznego wynika bezpośrednio z brzmienia art. 99 ust. 3 ustawy z dnia 11 września 2019 r. – Prawo zamówień publicznych (DZ. U. z 2019 poz. 2019):
+> - https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20190002019
+
+## Słowniki adresowe
+Zastosowano słowniki województw, powiatów, gmin, miejscowości i ulic wg bazy danych TERYT:
+- https://eteryt.stat.gov.pl/eTeryt/rejestr_teryt/udostepnianie_danych/baza_teryt/uzytkownicy_indywidualni/pobieranie/pliki_pelne.aspx?contrast=default
+> [!NOTE]
+> - zbiór TERC: nazwa województwa/powiatu/gminy oraz odpowiedni kod wg TERYT
+> - zbiór SIMC: nazwa miejscowości oraz odpowiedni kod wg TERYT
+> - zbiór ULIC: nazwy/rodzaj ulicy oraz odpowiedni kod wg TERYT

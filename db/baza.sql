@@ -552,17 +552,17 @@ ALTER TABLE `zamowienia`
 -- Constraints for table `kontrahenci`
 --
 ALTER TABLE `kontrahenci`
-  ADD CONSTRAINT `IdMiejscowosci` FOREIGN KEY (`IdMiejscowosci`) REFERENCES `simc` (`IdMiejscowosci`),
-  ADD CONSTRAINT `KontrahentId` FOREIGN KEY (`KontrahentId`) REFERENCES `identyfikatory_kontrahentow` (`Id`),
-  ADD CONSTRAINT `SkrotNazwyKraju` FOREIGN KEY (`SkrotNazwyKraju`) REFERENCES `kraje` (`Skrot`);
+  ADD CONSTRAINT `kontrahenci_ibfk_1` FOREIGN KEY (`IdMiejscowosci`) REFERENCES `simc` (`IdMiejscowosci`),
+  ADD CONSTRAINT `kontrahenci_ibfk_2` FOREIGN KEY (`KontrahentId`) REFERENCES `identyfikatory_kontrahentow` (`Id`),
+  ADD CONSTRAINT `kontrahenci_ibfk_3` FOREIGN KEY (`SkrotNazwyKraju`) REFERENCES `kraje` (`Skrot`);
 
 --
 -- Constraints for table `uslugi_pod_wydatkiem`
 --
 ALTER TABLE `uslugi_pod_wydatkiem`
-  ADD CONSTRAINT `kontrahenci_ibfk_1` FOREIGN KEY (`KodCPV`) REFERENCES `cpv` (`Kod`),
-  ADD CONSTRAINT `kontrahenci_ibfk_2` FOREIGN KEY (`KursEuroWDniu`) REFERENCES `kurs_euro` (`Data`),
-  ADD CONSTRAINT `kontrahenci_ibfk_3` FOREIGN KEY (`WydatekId`) REFERENCES `wydatki` (`Id`);
+  ADD CONSTRAINT `uslugi_pod_wydatkiem_ibfk_1` FOREIGN KEY (`KodCPV`) REFERENCES `cpv` (`Kod`),
+  ADD CONSTRAINT `uslugi_pod_wydatkiem_ibfk_2` FOREIGN KEY (`KursEuroWDniu`) REFERENCES `kurs_euro` (`Data`),
+  ADD CONSTRAINT `uslugi_pod_wydatkiem_ibfk_3` FOREIGN KEY (`WydatekId`) REFERENCES `wydatki` (`Id`);
 
 --
 -- Constraints for table `uzytkownicy`
@@ -581,8 +581,8 @@ ALTER TABLE `wydatki`
 -- Constraints for table `wydatki_pod_zamowieniem`
 --
 ALTER TABLE `wydatki_pod_zamowieniem`
-  ADD CONSTRAINT `WydatekId` FOREIGN KEY (`WydatekId`) REFERENCES `wydatki` (`Id`),
-  ADD CONSTRAINT `ZamowienieId` FOREIGN KEY (`ZamowienieId`) REFERENCES `zamowienia` (`Id`);
+  ADD CONSTRAINT `wydatki_pod_zamowieniem_ibfk_1` FOREIGN KEY (`WydatekId`) REFERENCES `wydatki` (`Id`),
+  ADD CONSTRAINT `wydatki_pod_zamowieniem_ibfk_2` FOREIGN KEY (`ZamowienieId`) REFERENCES `zamowienia` (`Id`);
 
 --
 -- Constraints for table `zamowienia`

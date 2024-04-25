@@ -58,7 +58,7 @@ CREATE TABLE `kontrahenci` (
   `Grupa` char(100) COLLATE utf8_polish_ci NOT NULL COMMENT 'Kategoria lub grupa, do której należy kontrahent, pomagająca w klasyfikacji i segregacji klientów',
   `Adres` char(255) COLLATE utf8_polish_ci NOT NULL COMMENT 'Adres zamieszkania lub siedziby kontrahenta, zawierający informacje potrzebne do kontaktu pocztowego czy kurierskiego',
   `SkrotNazwyKraju` char(2) COLLATE utf8_polish_ci NOT NULL COMMENT 'klucz obcy z tabeli [kraje]',
-  `KodPocztowy` char(20) COLLATE utf8_polish_ci NOT NULL COMMENT 'Kod pocztowy miejsca zamieszkania lub siedziby kontrahenta',
+  `KodPocztowy` char(10) COLLATE utf8_polish_ci NOT NULL COMMENT 'Kod pocztowy miejsca zamieszkania lub siedziby kontrahenta',
   `IdMiejscowosci` char(6) COLLATE utf8_polish_ci NOT NULL COMMENT 'klucz obcy z tabeli [simc]',
   `Telefon` char(15) COLLATE utf8_polish_ci NOT NULL COMMENT 'Numer telefonu kontrahenta',
   `Mail` char(255) COLLATE utf8_polish_ci NOT NULL COMMENT 'Adres e-mail kontrahenta',
@@ -73,7 +73,7 @@ CREATE TABLE `kontrahenci` (
 
 CREATE TABLE `kraje` (
   `Skrot` char(2) COLLATE utf8_polish_ci NOT NULL COMMENT '2 znakowy skrót nazwy kraju',
-  `Nazwa` char(255) COLLATE utf8_polish_ci NOT NULL COMMENT 'Pełna nazwa kraju'
+  `Nazwa` char(40) COLLATE utf8_polish_ci NOT NULL COMMENT 'Pełna nazwa kraju (do poprawki na lokalizację PL)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 --
@@ -283,7 +283,7 @@ INSERT INTO `kraje` (`Skrot`, `Nazwa`) VALUES
 
 CREATE TABLE `kurs_euro` (
   `Data` date NOT NULL COMMENT 'Data wprowadzenia obecnego kursy euro',
-  `Kurs` decimal(7,2) NOT NULL COMMENT 'Kurs euro'
+  `Kurs` decimal(2,4) NOT NULL COMMENT 'Kurs euro'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 -- --------------------------------------------------------

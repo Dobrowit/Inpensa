@@ -283,7 +283,7 @@ INSERT INTO `kraje` (`Skrot`, `Nazwa`) VALUES
 
 CREATE TABLE `kurs_euro` (
   `Data` date NOT NULL COMMENT 'Data wprowadzenia obecnego kursy euro',
-  `Kurs` decimal(2,4) NOT NULL COMMENT 'Kurs euro'
+  `Kurs` decimal(6,4) NOT NULL COMMENT 'Kurs euro'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 -- --------------------------------------------------------

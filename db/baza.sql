@@ -73,7 +73,7 @@ CREATE TABLE `kontrahenci` (
 
 CREATE TABLE `kraje` (
   `Skrot` char(2) COLLATE utf8_polish_ci NOT NULL COMMENT '2 znakowy skrót nazwy kraju',
-  `Nazwa` char(56) COLLATE utf8_polish_ci NOT NULL COMMENT 'Pełna nazwa kraju'
+  `Nazwa` char(70) COLLATE utf8_polish_ci NOT NULL COMMENT 'Pełna nazwa kraju'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 --

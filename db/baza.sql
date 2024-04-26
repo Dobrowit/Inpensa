@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2024 at 01:02 PM
+-- Generation Time: Apr 26, 2024 at 02:27 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -44,6 +44,8 @@ CREATE TABLE `identyfikatory_kontrahentow` (
   `NIP` char(10) DEFAULT NULL COMMENT 'Numer identyfikacji podatkowej (NIP)',
   `InnyIdentyfikator` char(255) DEFAULT NULL COMMENT 'Domyślnie NULL, pole ma za zadanie przechowywać zagraniczne identyfikatory'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+-- --------------------------------------------------------
 
 --
 -- Struktura tabeli dla tabeli `kontrahenci`
@@ -430,10 +432,12 @@ INSERT INTO `uzytkownicy` (`Login`, `Hash`, `Imie`, `Nazwisko`, `Mail`, `Telefon
 
 CREATE TABLE `wydatki` (
   `Id` int(11) NOT NULL COMMENT 'Unikalny identyfikator wydatku',
-  `WprowadzonePrzez` char(50) NOT NULL COMMENT 'Urzytkownik, który wprowadził zamówienie do bazy. Klucz obcy bazy [uzytkownicy]',
+  `NumerFaktury` char(255) NOT NULL COMMENT 'Numer faktury',
   `NazwaWydatku` char(255) NOT NULL COMMENT 'Nazwa wydatku, powinna krótko i dokładnie opisywać wydatek.',
   `PodstawaPrawna` char(255) DEFAULT NULL COMMENT 'Podstawa prawna wydatku. Może zawierać odniesienia do konkretnych przepisów prawa, na podstawie których dokonano wydatku.',
-  `KontrahentId` int(11) NOT NULL COMMENT ' Klucz obcy z tabeli [identyfikatory_kontrahentow]'
+  `DataWydatku` date NOT NULL,
+  `KontrahentId` int(11) NOT NULL COMMENT ' Klucz obcy z tabeli [identyfikatory_kontrahentow]',
+  `WprowadzonePrzez` char(50) NOT NULL COMMENT 'Urzytkownik, który wprowadził zamówienie do bazy. Klucz obcy bazy [uzytkownicy]'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 -- --------------------------------------------------------

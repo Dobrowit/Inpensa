@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.2
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8500
--- Generation Time: Apr 25, 2024 at 12:09 PM
--- Server version: 5.7.24
--- PHP Version: 8.0.1
+-- Host: 127.0.0.1
+-- Generation Time: Apr 26, 2024 at 01:02 PM
+-- Wersja serwera: 10.4.32-MariaDB
+-- Wersja PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,56 +24,55 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cpv`
+-- Struktura tabeli dla tabeli `cpv`
 --
 
 CREATE TABLE `cpv` (
-  `Kod` char(10) COLLATE utf8_polish_ci NOT NULL COMMENT 'wy] Kod CPV [https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=celex%3A32008R0213]',
-  `Opis` char(255) COLLATE utf8_polish_ci NOT NULL COMMENT 'Opis kodu CPV'
+  `Kod` char(10) NOT NULL COMMENT 'wy] Kod CPV [https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=celex%3A32008R0213]',
+  `Opis` char(255) NOT NULL COMMENT 'Opis kodu CPV'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `identyfikatory_kontrahentow`
+-- Struktura tabeli dla tabeli `identyfikatory_kontrahentow`
 --
 
 CREATE TABLE `identyfikatory_kontrahentow` (
   `Id` int(11) NOT NULL COMMENT 'Unikalny indetyfikator',
-  `PESEL` char(11) COLLATE utf8_polish_ci DEFAULT NULL COMMENT 'Powszechny Elektroniczny System Ewidencji Ludności (PESEL) (numer osoby z tego systemu)',
-  `NIP` char(10) COLLATE utf8_polish_ci DEFAULT NULL COMMENT 'Numer identyfikacji podatkowej (NIP)',
-  `InnyIdentyfikator` char(255) COLLATE utf8_polish_ci DEFAULT NULL COMMENT 'Domyślnie NULL, pole ma za zadanie przechowywać zagraniczne identyfikatory'
+  `PESEL` char(11) DEFAULT NULL COMMENT 'Powszechny Elektroniczny System Ewidencji Ludności (PESEL) (numer osoby z tego systemu)',
+  `NIP` char(10) DEFAULT NULL COMMENT 'Numer identyfikacji podatkowej (NIP)',
+  `InnyIdentyfikator` char(255) DEFAULT NULL COMMENT 'Domyślnie NULL, pole ma za zadanie przechowywać zagraniczne identyfikatory'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `kontrahenci`
+-- Struktura tabeli dla tabeli `kontrahenci`
 --
 
 CREATE TABLE `kontrahenci` (
   `KontrahentId` int(11) NOT NULL COMMENT 'Unikalny identyfikator kontrachenta z tabeli [identyfikatory_kontrahentow]',
-  `Nazwa` char(255) COLLATE utf8_polish_ci NOT NULL COMMENT 'Pełna nazwa kontrahenta. Powinna być wystarczająco długa, aby pomieścić różnorodne nazwy firm i osób (obecnie najdłuższa prawnie ilośc znaków to 31 stan na 16.04.2024)',
-  `SkrotNazwy` char(31) COLLATE utf8_polish_ci NOT NULL COMMENT 'Skrócona nazwa kontrachenta wedle prawa maksymalna długość to 31 znaków',
-  `Grupa` char(100) COLLATE utf8_polish_ci NOT NULL COMMENT 'Kategoria lub grupa, do której należy kontrahent, pomagająca w klasyfikacji i segregacji klientów',
-  `Adres` char(255) COLLATE utf8_polish_ci NOT NULL COMMENT 'Adres zamieszkania lub siedziby kontrahenta, zawierający informacje potrzebne do kontaktu pocztowego czy kurierskiego',
-  `SkrotNazwyKraju` char(2) COLLATE utf8_polish_ci NOT NULL COMMENT 'klucz obcy z tabeli [kraje]',
-  `KodPocztowy` char(10) COLLATE utf8_polish_ci NOT NULL COMMENT 'Kod pocztowy miejsca zamieszkania lub siedziby kontrahenta',
-  `IdMiejscowosci` char(6) COLLATE utf8_polish_ci NOT NULL COMMENT 'klucz obcy z tabeli [simc]',
-  `Telefon` char(15) COLLATE utf8_polish_ci NOT NULL COMMENT 'Numer telefonu kontrahenta',
-  `Mail` char(255) COLLATE utf8_polish_ci NOT NULL COMMENT 'Adres e-mail kontrahenta',
-  `StronaInternetowa` char(255) COLLATE utf8_polish_ci NOT NULL COMMENT 'Adres url strony kontrachenta'
+  `Nazwa` char(255) NOT NULL COMMENT 'Pełna nazwa kontrahenta. Powinna być wystarczająco długa, aby pomieścić różnorodne nazwy firm i osób (obecnie najdłuższa prawnie ilośc znaków to 31 stan na 16.04.2024)',
+  `SkrotNazwy` char(31) NOT NULL COMMENT 'Skrócona nazwa kontrachenta wedle prawa maksymalna długość to 31 znaków',
+  `Grupa` char(100) NOT NULL COMMENT 'Kategoria lub grupa, do której należy kontrahent, pomagająca w klasyfikacji i segregacji klientów',
+  `Adres` char(255) NOT NULL COMMENT 'Adres zamieszkania lub siedziby kontrahenta, zawierający informacje potrzebne do kontaktu pocztowego czy kurierskiego',
+  `SkrotNazwyKraju` char(2) NOT NULL DEFAULT 'pl' COMMENT 'klucz obcy z tabeli [kraje]',
+  `KodPocztowy` char(10) NOT NULL COMMENT 'Kod pocztowy miejsca zamieszkania lub siedziby kontrahenta',
+  `IdMiejscowosci` char(6) NOT NULL COMMENT 'klucz obcy z tabeli [simc]',
+  `Telefon` char(15) NOT NULL COMMENT 'Numer telefonu kontrahenta',
+  `Mail` char(255) NOT NULL COMMENT 'Adres e-mail kontrahenta',
+  `StronaInternetowa` char(255) NOT NULL COMMENT 'Adres url strony kontrachenta',
+  `WaznyDo` date DEFAULT NULL COMMENT 'data ważności informacji kontrahenta na wypadek zmiany danych kluczowych'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kraje`
+-- Struktura tabeli dla tabeli `kraje`
 --
 
 CREATE TABLE `kraje` (
-  `Skrot` char(2) COLLATE utf8_polish_ci NOT NULL COMMENT '2 znakowy skrót nazwy kraju',
-  `Nazwa` char(70) COLLATE utf8_polish_ci NOT NULL COMMENT 'Pełna nazwa kraju'
+  `Skrot` char(2) NOT NULL COMMENT '2 znakowy skrót nazwy kraju',
+  `Nazwa` char(70) NOT NULL COMMENT 'Pełna nazwa kraju'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 --
@@ -334,7 +333,7 @@ INSERT INTO `kraje` (`Skrot`, `Nazwa`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kurs_euro`
+-- Struktura tabeli dla tabeli `kurs_euro`
 --
 
 CREATE TABLE `kurs_euro` (
@@ -345,45 +344,55 @@ CREATE TABLE `kurs_euro` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `simc`
+-- Struktura tabeli dla tabeli `simc`
 --
 
 CREATE TABLE `simc` (
-  `IdMiejscowosci` char(6) COLLATE utf8_polish_ci NOT NULL COMMENT 'Id miejscowości w Rejestrze Teryt, system SIMC (https://eteryt.stat.gov.pl/eTeryt/rejestr_teryt/udostepnianie_danych/baza_teryt/uzytkownicy_indywidualni/pobieranie/pliki_pelne.aspx?contrast=default)'
+  `IdMiejscowosci` char(6) NOT NULL COMMENT 'Id miejscowości w Rejestrze Teryt, system SIMC (https://eteryt.stat.gov.pl/eTeryt/rejestr_teryt/udostepnianie_danych/baza_teryt/uzytkownicy_indywidualni/pobieranie/pliki_pelne.aspx?contrast=default)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `status_zamowienia`
+-- Struktura tabeli dla tabeli `status_zamowienia`
 --
 
 CREATE TABLE `status_zamowienia` (
   `Id` int(11) NOT NULL COMMENT 'Unikatowy identyfikator statusu',
-  `NazwaStatusu` char(50) COLLATE utf8_polish_ci NOT NULL COMMENT 'Nazwa statusu'
+  `NazwaStatusu` char(50) NOT NULL COMMENT 'Nazwa statusu'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `uprawnienia`
+-- Struktura tabeli dla tabeli `uprawnienia`
 --
 
 CREATE TABLE `uprawnienia` (
-  `Id` int(11) NOT NULL COMMENT 'Unikatowy Identyfikator uprawnienia',
-  `Nazwa` char(255) COLLATE utf8_polish_ci NOT NULL COMMENT 'Nazwa uprawnienia',
-  `MocUprawnien` int(11) NOT NULL DEFAULT '1' COMMENT 'Moc uprawnienia 1 - podglad, 2 - dodawanie, 3 - podgląd i dodawamoe, 4 - edycja i usuwanie, 7 - wszystkie uprawnienia'
+  `MocUprawnien` int(11) NOT NULL DEFAULT 1 COMMENT 'Moc uprawnienia 1 - podglad, 2 - dodawanie, 3 - podgląd i dodawamoe, 4 - edycja i usuwanie, 7 - wszystkie uprawnienia',
+  `Nazwa` char(255) NOT NULL COMMENT 'Nazwa uprawnienia'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Dumping data for table `uprawnienia`
+--
+
+INSERT INTO `uprawnienia` (`MocUprawnien`, `Nazwa`) VALUES
+(1, 'Podgląd'),
+(2, 'Dodawanie'),
+(3, 'Podgląd i dodawanie'),
+(4, 'Edycja i usuwanie'),
+(7, 'Wszystkie uprawnienia');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `uslugi_pod_wydatkiem`
+-- Struktura tabeli dla tabeli `uslugi_pod_wydatkiem`
 --
 
 CREATE TABLE `uslugi_pod_wydatkiem` (
   `WydatekId` int(11) NOT NULL COMMENT 'Identyfikator wydatku',
-  `KodCPV` char(10) COLLATE utf8_polish_ci NOT NULL COMMENT 'Klucz obcy do kodu do tabeli [cpv]',
+  `KodCPV` char(10) NOT NULL COMMENT 'Klucz obcy do kodu do tabeli [cpv]',
   `Netto` decimal(7,2) NOT NULL COMMENT 'Cena netto wydatku w zł',
   `Euro` decimal(7,2) NOT NULL COMMENT 'Cena netto w euro',
   `KursEuroWDniu` date NOT NULL COMMENT 'Data pobranego kursu euro. Klucz obcy do tabeli [kurs_euro]'
@@ -392,38 +401,45 @@ CREATE TABLE `uslugi_pod_wydatkiem` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `uzytkownicy`
+-- Struktura tabeli dla tabeli `uzytkownicy`
 --
 
 CREATE TABLE `uzytkownicy` (
-  `Login` char(50) COLLATE utf8_polish_ci NOT NULL COMMENT 'Unikalna nazwa użytkownika używana do logowania do systemu',
-  `Hash` char(255) COLLATE utf8_polish_ci NOT NULL COMMENT 'Hasło użytkownika zahashowane dla bezpieczeństwa',
-  `Imie` char(50) COLLATE utf8_polish_ci NOT NULL COMMENT 'Imię użytkownika\r\n',
-  `Nazwisko` char(50) COLLATE utf8_polish_ci NOT NULL COMMENT 'Nazwisko użytkownika',
-  `Mail` char(255) COLLATE utf8_polish_ci NOT NULL COMMENT 'Adres e-mail użytkownika',
-  `Telefon` char(15) COLLATE utf8_polish_ci NOT NULL COMMENT 'Numer telefonu użytkownika',
-  `UprawnienieId` int(11) NOT NULL COMMENT 'Identyfikator uprawnień danego użytkownika. Klucz obcy z tabeli [uprawnienia]',
-  `Aktywne` tinyint(1) NOT NULL COMMENT 'Czy konto nie zostało wyłączone'
+  `Login` char(50) NOT NULL COMMENT 'Unikalna nazwa użytkownika używana do logowania do systemu',
+  `Hash` char(255) NOT NULL COMMENT 'Hasło użytkownika zahashowane dla bezpieczeństwa',
+  `Imie` char(50) NOT NULL COMMENT 'Imię użytkownika\r\n',
+  `Nazwisko` char(50) NOT NULL COMMENT 'Nazwisko użytkownika',
+  `Mail` char(255) DEFAULT NULL COMMENT 'Adres e-mail użytkownika',
+  `Telefon` char(15) DEFAULT NULL COMMENT 'Numer telefonu użytkownika',
+  `MocUprawnienia` int(11) NOT NULL COMMENT 'Identyfikator uprawnień danego użytkownika. Klucz obcy z tabeli [uprawnienia]',
+  `Aktywne` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Czy konto nie zostało wyłączone'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Dumping data for table `uzytkownicy`
+--
+
+INSERT INTO `uzytkownicy` (`Login`, `Hash`, `Imie`, `Nazwisko`, `Mail`, `Telefon`, `MocUprawnienia`, `Aktywne`) VALUES
+('system', '92ea4d84852fea60d6b9f3b3716b52936b0555b58246fd4a51625a9026039481', 'system', 'system', NULL, NULL, 7, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wydatki`
+-- Struktura tabeli dla tabeli `wydatki`
 --
 
 CREATE TABLE `wydatki` (
   `Id` int(11) NOT NULL COMMENT 'Unikalny identyfikator wydatku',
-  `WprowadzonePrzez` char(50) COLLATE utf8_polish_ci NOT NULL COMMENT 'Urzytkownik, który wprowadził zamówienie do bazy. Klucz obcy bazy [uzytkownicy]',
-  `NazwaWydatku` char(255) COLLATE utf8_polish_ci NOT NULL COMMENT 'Nazwa wydatku, powinna krótko i dokładnie opisywać wydatek.',
-  `PodstawaPrawna` char(255) COLLATE utf8_polish_ci NOT NULL COMMENT 'Podstawa prawna wydatku. Może zawierać odniesienia do konkretnych przepisów prawa, na podstawie których dokonano wydatku.',
+  `WprowadzonePrzez` char(50) NOT NULL COMMENT 'Urzytkownik, który wprowadził zamówienie do bazy. Klucz obcy bazy [uzytkownicy]',
+  `NazwaWydatku` char(255) NOT NULL COMMENT 'Nazwa wydatku, powinna krótko i dokładnie opisywać wydatek.',
+  `PodstawaPrawna` char(255) DEFAULT NULL COMMENT 'Podstawa prawna wydatku. Może zawierać odniesienia do konkretnych przepisów prawa, na podstawie których dokonano wydatku.',
   `KontrahentId` int(11) NOT NULL COMMENT ' Klucz obcy z tabeli [identyfikatory_kontrahentow]'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wydatki_pod_zamowieniem`
+-- Struktura tabeli dla tabeli `wydatki_pod_zamowieniem`
 --
 
 CREATE TABLE `wydatki_pod_zamowieniem` (
@@ -434,17 +450,17 @@ CREATE TABLE `wydatki_pod_zamowieniem` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `zamowienia`
+-- Struktura tabeli dla tabeli `zamowienia`
 --
 
 CREATE TABLE `zamowienia` (
   `Id` int(11) NOT NULL COMMENT 'Unikatowy identyfikator zamówienia',
-  `WprowadzonePrzez` char(50) COLLATE utf8_polish_ci NOT NULL COMMENT 'Urzytkownik, który wprowadził zamówienie do bazy. Klucz obcy bazy [uzytkownicy]',
-  `NumerZamowienia` char(50) COLLATE utf8_polish_ci NOT NULL COMMENT 'Numer zamówienia, bądź umowy jaka widneje na dokumencie',
-  `NumerWRejestrzeDokumentow` char(50) COLLATE utf8_polish_ci NOT NULL COMMENT 'Numer w rejestrze dokumentów',
+  `WprowadzonePrzez` char(50) NOT NULL COMMENT 'Urzytkownik, który wprowadził zamówienie do bazy. Klucz obcy bazy [uzytkownicy]',
+  `NumerZamowienia` char(50) NOT NULL COMMENT 'Numer zamówienia, bądź umowy jaka widneje na dokumencie',
+  `NumerWRejestrzeDokumentow` char(50) NOT NULL COMMENT 'Numer w rejestrze dokumentów',
   `DataWprowadzenia` date NOT NULL COMMENT 'Data wprowadzenia dokumentu',
   `DataDokumentu` date NOT NULL COMMENT 'Data dokumentu',
-  `PrzedmiotZamowienia` char(255) COLLATE utf8_polish_ci NOT NULL COMMENT 'Przedmiot zamówienia',
+  `PrzedmiotZamowienia` char(255) NOT NULL COMMENT 'Przedmiot zamówienia',
   `StatusZamowieniaId` int(11) NOT NULL COMMENT 'Obecny status zamówienia',
   `SzacowanaWartoscNetto` decimal(7,2) NOT NULL COMMENT 'Szacowana wartość netto w zł',
   `KursEuroWDniu` date NOT NULL COMMENT 'Data pobranego kursu euro. Klucz obcy do tabeli [kurs_euro]',
@@ -452,23 +468,23 @@ CREATE TABLE `zamowienia` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 --
--- Indexes for dumped tables
+-- Indeksy dla zrzutów tabel
 --
 
 --
--- Indexes for table `cpv`
+-- Indeksy dla tabeli `cpv`
 --
 ALTER TABLE `cpv`
   ADD PRIMARY KEY (`Kod`);
 
 --
--- Indexes for table `identyfikatory_kontrahentow`
+-- Indeksy dla tabeli `identyfikatory_kontrahentow`
 --
 ALTER TABLE `identyfikatory_kontrahentow`
   ADD PRIMARY KEY (`Id`);
 
 --
--- Indexes for table `kontrahenci`
+-- Indeksy dla tabeli `kontrahenci`
 --
 ALTER TABLE `kontrahenci`
   ADD KEY `KontrahentId` (`KontrahentId`),
@@ -476,37 +492,37 @@ ALTER TABLE `kontrahenci`
   ADD KEY `IdMiejscowosci` (`IdMiejscowosci`);
 
 --
--- Indexes for table `kraje`
+-- Indeksy dla tabeli `kraje`
 --
 ALTER TABLE `kraje`
   ADD PRIMARY KEY (`Skrot`);
 
 --
--- Indexes for table `kurs_euro`
+-- Indeksy dla tabeli `kurs_euro`
 --
 ALTER TABLE `kurs_euro`
   ADD PRIMARY KEY (`Data`);
 
 --
--- Indexes for table `simc`
+-- Indeksy dla tabeli `simc`
 --
 ALTER TABLE `simc`
   ADD PRIMARY KEY (`IdMiejscowosci`);
 
 --
--- Indexes for table `status_zamowienia`
+-- Indeksy dla tabeli `status_zamowienia`
 --
 ALTER TABLE `status_zamowienia`
   ADD PRIMARY KEY (`Id`);
 
 --
--- Indexes for table `uprawnienia`
+-- Indeksy dla tabeli `uprawnienia`
 --
 ALTER TABLE `uprawnienia`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`MocUprawnien`);
 
 --
--- Indexes for table `uslugi_pod_wydatkiem`
+-- Indeksy dla tabeli `uslugi_pod_wydatkiem`
 --
 ALTER TABLE `uslugi_pod_wydatkiem`
   ADD KEY `KodCPV` (`KodCPV`),
@@ -514,14 +530,14 @@ ALTER TABLE `uslugi_pod_wydatkiem`
   ADD KEY `WydatekId` (`WydatekId`);
 
 --
--- Indexes for table `uzytkownicy`
+-- Indeksy dla tabeli `uzytkownicy`
 --
 ALTER TABLE `uzytkownicy`
   ADD PRIMARY KEY (`Login`),
-  ADD KEY `UprawnienieId` (`UprawnienieId`);
+  ADD KEY `UprawnienieId` (`MocUprawnienia`);
 
 --
--- Indexes for table `wydatki`
+-- Indeksy dla tabeli `wydatki`
 --
 ALTER TABLE `wydatki`
   ADD PRIMARY KEY (`Id`),
@@ -529,14 +545,14 @@ ALTER TABLE `wydatki`
   ADD KEY `KontrahentId` (`KontrahentId`);
 
 --
--- Indexes for table `wydatki_pod_zamowieniem`
+-- Indeksy dla tabeli `wydatki_pod_zamowieniem`
 --
 ALTER TABLE `wydatki_pod_zamowieniem`
   ADD KEY `ZamowienieId` (`ZamowienieId`),
   ADD KEY `WydatekId` (`WydatekId`);
 
 --
--- Indexes for table `zamowienia`
+-- Indeksy dla tabeli `zamowienia`
 --
 ALTER TABLE `zamowienia`
   ADD PRIMARY KEY (`Id`),
@@ -552,7 +568,7 @@ ALTER TABLE `zamowienia`
 -- AUTO_INCREMENT for table `identyfikatory_kontrahentow`
 --
 ALTER TABLE `identyfikatory_kontrahentow`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unikalny indetyfikator';
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unikalny indetyfikator', AUTO_INCREMENT=2048;
 
 --
 -- AUTO_INCREMENT for table `wydatki`
@@ -590,7 +606,7 @@ ALTER TABLE `uslugi_pod_wydatkiem`
 -- Constraints for table `uzytkownicy`
 --
 ALTER TABLE `uzytkownicy`
-  ADD CONSTRAINT `uzytkownicy_ibfk_1` FOREIGN KEY (`UprawnienieId`) REFERENCES `uprawnienia` (`Id`);
+  ADD CONSTRAINT `uzytkownicy_ibfk_1` FOREIGN KEY (`MocUprawnienia`) REFERENCES `uprawnienia` (`MocUprawnien`);
 
 --
 -- Constraints for table `wydatki`

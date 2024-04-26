@@ -41,31 +41,32 @@ _`Klucz obcy`_
 ## cpv
 | Kolumna | Typ | Opis |
 |---------|-----|------|
-| **`Kod`** | char(10)  | wy] Kod CPV https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=celex%3A32008R0213 |
+| **`Kod`** | char(10)  | Kod CPV https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=celex%3A32008R0213 |
 | Opis      | char(255) | Opis kodu CPV |
 
 ## identyfikatory_kontrahentow
 | Kolumna | Typ | Opis |
 |---------|-----|------|
-| **`Id`**          | int(11)   | Unikalny indetyfikator |
-| PESEL             | char(11)  | Powszechny Elektroniczny System Ewidencji Ludności (PESEL) (numer osoby z tego systemu) |
-| NIP               | char(10)  | Numer identyfikacji podatkowej (NIP) |
-| InnyIdentyfikator | char(255) | Domyślnie NULL, pole ma za zadanie przechowywać zagraniczne identyfikatory |
+| **`Id`**          | int(11), AUTO_INCREMENT   | Unikalny indetyfikator |
+| PESEL             | char(11), Domyślnie NULL  | Powszechny Elektroniczny System Ewidencji Ludności (PESEL) (numer osoby z tego systemu) |
+| NIP               | char(10), Domyślnie NULL  | Numer identyfikacji podatkowej (NIP) |
+| InnyIdentyfikator | char(255), Domyślnie NULL | Kolumna ma za zadanie przechowywać zagraniczne identyfikatory |
 
 ## kontrahenci
 | Kolumna | Typ | Opis |
 |---------|-----|------|
-| _`KontrahentId`_    | int(11)   | Unikalny identyfikator kontrachenta z tabeli **[identyfikatory_kontrahentow]** |
-| Nazwa               | char(255) | Pełna nazwa kontrahenta. Powinna być wystarczająco długa, aby pomieścić różnorodne nazwy firm i osób (obecnie najdłuższa prawnie ilośc znaków to 31 stan na 16.04.2024) |
-| SkrotNazwy          | char(31)  | Skrócona nazwa kontrachenta wedle prawa maksymalna długość to 31 znaków |
-| Grupa               | char(100) | Kategoria lub grupa, do której należy kontrahent, pomagająca w klasyfikacji i segregacji klientów |
-| Adres               | char(255) | Adres zamieszkania lub siedziby kontrahenta, zawierający informacje potrzebne do kontaktu pocztowego czy kurierskiego |
-| _`SkrotNazwyKraju`_ | char(2)   | klucz obcy z tabeli **[kraje]** |
-| KodPocztowy         | char(10)  | Kod pocztowy miejsca zamieszkania lub siedziby kontrahenta |
-| _`IdMiejscowosci`_  | char(6)   | klucz obcy z tabeli **[simc]** |
-| Telefon             | char(15)  | Numer telefonu kontrahenta |
-| Mail                | char(255) | Adres e-mail kontrahenta |
-| StronaInternetowa   | char(255) | Adres url strony kontrachenta |
+| _`KontrahentId`_    | int(11)                   | Unikalny identyfikator kontrachenta z tabeli **[identyfikatory_kontrahentow]** |
+| Nazwa               | char(255)                 | Pełna nazwa kontrahenta. Powinna być wystarczająco długa, aby pomieścić różnorodne nazwy firm i osób (obecnie najdłuższa prawnie ilośc znaków to 31 stan na 16.04.2024) |
+| SkrotNazwy          | char(31), Domyślnie pl    | Skrócona nazwa kontrachenta wedle prawa maksymalna długość to 31 znaków |
+| Grupa               | char(100)                 | Kategoria lub grupa, do której należy kontrahent, pomagająca w klasyfikacji i segregacji klientów |
+| Adres               | char(255)                 | Adres zamieszkania lub siedziby kontrahenta, zawierający informacje potrzebne do kontaktu pocztowego czy kurierskiego |
+| _`SkrotNazwyKraju`_ | char(2)                   | klucz obcy z tabeli **[kraje]** |
+| KodPocztowy         | char(10)                  | Kod pocztowy miejsca zamieszkania lub siedziby kontrahenta |
+| _`IdMiejscowosci`_  | char(6)                   | klucz obcy z tabeli **[simc]** |
+| Telefon             | char(15), Domyślnie NULL  | Numer telefonu kontrahenta |
+| Mail                | char(255), Domyślnie NULL | Adres e-mail kontrahenta |
+| StronaInternetowa   | char(255)                 | Adres url strony kontrachenta |
+| WaznyDo             | data, Domyślnie NULL      | Data ważności informacji kontrahenta na wypadek zmiany danych kluczowych |
 
 ## kraje
 | Kolumna | Typ | Opis |
@@ -93,9 +94,8 @@ _`Klucz obcy`_
 ## uprawnienia
 | Kolumna | Typ | Opis |
 |---------|-----|------|
-| **`Id`**     | int(11)   | Unikatowy Identyfikator uprawnienia |
+| **`MocUprawnien`** | int(11)   | Unikatowa Moc uprawnienia 1 - podglad, 2 - dodawanie, 3 - podgląd i dodawamoe, 4 - edycja i usuwanie, 7 - wszystkie uprawnienia |
 | Nazwa        | char(255) | Nazwa uprawnienia |
-| MocUprawnien | int(11)   | Moc uprawnienia 1 - podglad, 2 - dodawanie, 3 - podgląd i dodawamoe, 4 - edycja i usuwanie, 7 - wszystkie uprawnienia |
 
 ## uslugi_pod_wydatkiem
 | Kolumna | Typ | Opis |
@@ -109,23 +109,23 @@ _`Klucz obcy`_
 ## uzytkownicy
 | Kolumna | Typ | Opis |
 |---------|-----|------|
-| **`Login`**       | char(50)   | Unikalna nazwa użytkownika używana do logowania do systemu |
-| Hash              | char(255)  | Hasło użytkownika zahashowane dla bezpieczeństwa |
-| Imie              | char(50)   | Imię użytkownika |
-| Nazwisko          | char(50)   | Nazwisko użytkownika |
-| Mail              | char(255)  | Adres e-mail użytkownika |
-| Telefon           | char(15)   | Numer telefonu użytkownika |
-| _`UprawnienieId`_ | int(11)    | Identyfikator uprawnień danego użytkownika. Klucz obcy z tabeli **[uprawnienia]** |
-| Aktywne           | tinyint(1) | Czy konto nie zostało wyłączone |
+| **`Login`**       | char(50)                 | Unikalna nazwa użytkownika używana do logowania do systemu |
+| Hash              | char(255)                | Hasło użytkownika zahashowane dla bezpieczeństwa |
+| Imie              | char(50)                 | Imię użytkownika |
+| Nazwisko          | char(50)                 | Nazwisko użytkownika |
+| Mail              | char(255) Domyślnie NULL | Adres e-mail użytkownika |
+| Telefon           | char(15)  Domyślnie NULL | Numer telefonu użytkownika |
+| _`UprawnienieId`_ | int(11)                  | Identyfikator uprawnień danego użytkownika. Klucz obcy z tabeli **[uprawnienia]** |
+| Aktywne           | tinyint(1)               | Czy konto nie zostało wyłączone |
 
 ## wydatki
 | Kolumna | Typ | Opis |
 |---------|-----|------|
-| **`Id`**             | int(11)   | Unikalny identyfikator wydatku |
-| _`WprowadzonePrzez`_ | char(50)  | Urzytkownik, który wprowadził zamówienie do bazy. Klucz obcy bazy **[uzytkownicy]** |
-| NazwaWydatku         | char(255) | Nazwa wydatku, powinna krótko i dokładnie opisywać wydatek. |
-| PodstawaPrawna       | char(255) | Podstawa prawna wydatku. Może zawierać odniesienia do konkretnych przepisów prawa, na podstawie których dokonano wydatku. |
-| _`KontrahentId`_     | int(11)   | Klucz obcy z tabeli **[identyfikatory_kontrahentow]** |
+| **`Id`**             | int(11), AUTO_INCREMENT  | Unikalny identyfikator wydatku |
+| _`WprowadzonePrzez`_ | char(50)                 | Urzytkownik, który wprowadził zamówienie do bazy. Klucz obcy bazy **[uzytkownicy]** |
+| NazwaWydatku         | char(255)                | Nazwa wydatku, powinna krótko i dokładnie opisywać wydatek. |
+| PodstawaPrawna       | char(255) Domyślnie NULL | Podstawa prawna wydatku. Może zawierać odniesienia do konkretnych przepisów prawa, na podstawie których dokonano wydatku. |
+| _`KontrahentId`_     | int(11)                  | Klucz obcy z tabeli **[identyfikatory_kontrahentow]** |
 
 ## wydatki_pod_zamowieniem
 | Kolumna | Typ | Opis |
@@ -136,14 +136,14 @@ _`Klucz obcy`_
 ## zamowienia
 | Kolumna | Typ | Opis |
 |---------|-----|------|
-| **`Id`**                  | int(11)      | Unikatowy identyfikator zamówienia |
-| _`WprowadzonePrzez`_      | char(50)     | Urzytkownik, który wprowadził zamówienie do bazy. Klucz obcy bazy **[uzytkownicy]** |
-| NumerZamowienia           | char(50)     | Numer zamówienia, bądź umowy jaka widneje na dokumencie |
-| NumerWRejestrzeDokumentow | char(50)     | Numer w rejestrze dokumentów |
-| DataWprowadzenia          | date         | Data wprowadzenia dokumentu |
-| DataDokumentu             | date         | Data dokumentu |
-| PrzedmiotZamowienia       | char(255)    | Przedmiot zamówienia |
-| _`StatusZamowieniaId`_    | int(11)      | Obecny status zamówienia |
-| SzacowanaWartoscNetto     | decimal(7,2) | Szacowana wartość netto w zł |
-| _`KursEuroWDniu`_         | date         | Data pobranego kursu euro. Klucz obcy do tabeli **[kurs_euro]** |
-| SzacowanaWartoscEuro      | decimal(7,2) | Szacowana cena w euro. |
+| **`Id`**                  | int(11), AUTO_INCREMENT | Unikatowy identyfikator zamówienia |
+| _`WprowadzonePrzez`_      | char(50)                | Urzytkownik, który wprowadził zamówienie do bazy. Klucz obcy bazy **[uzytkownicy]** |
+| NumerZamowienia           | char(50)                | Numer zamówienia, bądź umowy jaka widneje na dokumencie |
+| NumerWRejestrzeDokumentow | char(50)                | Numer w rejestrze dokumentów |
+| DataWprowadzenia          | date                    | Data wprowadzenia dokumentu |
+| DataDokumentu             | date                    | Data dokumentu |
+| PrzedmiotZamowienia       | char(255)               | Przedmiot zamówienia |
+| _`StatusZamowieniaId`_    | int(11)                 | Obecny status zamówienia |
+| SzacowanaWartoscNetto     | decimal(7,2)            | Szacowana wartość netto w zł |
+| _`KursEuroWDniu`_         | date                    | Data pobranego kursu euro. Klucz obcy do tabeli **[kurs_euro]** |
+| SzacowanaWartoscEuro      | decimal(7,2)            | Szacowana cena w euro. |

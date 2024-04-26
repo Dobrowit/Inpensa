@@ -123,8 +123,10 @@ _`Klucz obcy`_
 |---------|-----|------|
 | **`Id`**             | int(11), AUTO_INCREMENT  | Unikalny identyfikator wydatku |
 | _`WprowadzonePrzez`_ | char(50)                 | Urzytkownik, który wprowadził zamówienie do bazy. Klucz obcy bazy **[uzytkownicy]** |
-| NazwaWydatku         | char(255)                | Nazwa wydatku, powinna krótko i dokładnie opisywać wydatek. |
-| PodstawaPrawna       | char(255) Domyślnie NULL | Podstawa prawna wydatku. Może zawierać odniesienia do konkretnych przepisów prawa, na podstawie których dokonano wydatku. |
+| NumerFaktury         | char(255)                | Numer faktury |
+| NazwaWydatku         | char(255)                | Nazwa wydatku, powinna krótko i dokładnie opisywać wydatek |
+| PodstawaPrawna       | char(255) Domyślnie NULL | Podstawa prawna wydatku. Może zawierać odniesienia do konkretnych przepisów prawa, na podstawie których dokonano wydatku |
+| DataWydatku          | date                     | Data wydatku |
 | _`KontrahentId`_     | int(11)                  | Klucz obcy z tabeli **[identyfikatory_kontrahentow]** |
 
 ## wydatki_pod_zamowieniem
@@ -146,4 +148,4 @@ _`Klucz obcy`_
 | _`StatusZamowieniaId`_    | int(11)                 | Obecny status zamówienia |
 | SzacowanaWartoscNetto     | decimal(7,2)            | Szacowana wartość netto w zł |
 | _`KursEuroWDniu`_         | date                    | Data pobranego kursu euro. Klucz obcy do tabeli **[kurs_euro]** |
-| SzacowanaWartoscEuro      | decimal(7,2)            | Szacowana cena w euro. |
+| SzacowanaWartoscEuro      | decimal(7,2)            | Szacowana cena w euro |

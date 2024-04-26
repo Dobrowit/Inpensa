@@ -34,22 +34,22 @@ Zastosowano słowniki województw, powiatów, gmin, miejscowości i ulic wg bazy
 
 # Stuktura bazy danych (wykaz tabel)
 ## cpv
-| Kolumna | Typ       | Opis                                                                               |
-|---------|-----------|------------------------------------------------------------------------------------|
+| Kolumna | Typ | Opis |
+|---------|-----|------|
 | Kod     | char(10)  | wy] Kod CPV https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=celex%3A32008R0213 |
 | Opis    | char(255) | Opis kodu CPV |
 
 ## identyfikatory_kontrahentow
-| Kolumna | Typ       | Opis                                                                               |
-|---------|-----------|------------------------------------------------------------------------------------|
+| Kolumna | Typ | Opis |
+|---------|-----|------|
 | Id                | int(11)   | Unikalny indetyfikator |
 | PESEL             | char(11)  | Powszechny Elektroniczny System Ewidencji Ludności (PESEL) (numer osoby z tego systemu) |
 | NIP               | char(10)  | Numer identyfikacji podatkowej (NIP) |
 | InnyIdentyfikator | char(255) | Domyślnie NULL, pole ma za zadanie przechowywać zagraniczne identyfikatory |
 
 ## kontrahenci
-| Kolumna | Typ       | Opis                                                                               |
-|---------|-----------|------------------------------------------------------------------------------------|
+| Kolumna | Typ | Opis |
+|---------|-----|------|
 | KontrahentId       | int(11)   | Unikalny identyfikator kontrachenta z tabeli [identyfikatory_kontrahentow] |
 | Nazwa              | char(255) | Pełna nazwa kontrahenta. Powinna być wystarczająco długa, aby pomieścić różnorodne nazwy firm i osób (obecnie najdłuższa prawnie ilośc znaków to 31 stan na 16.04.2024) |
 | SkrotNazwy         | char(31)  | Skrócona nazwa kontrachenta wedle prawa maksymalna długość to 31 znaków |
@@ -63,38 +63,38 @@ Zastosowano słowniki województw, powiatów, gmin, miejscowości i ulic wg bazy
 | StronaInternetowa  | char(255) | Adres url strony kontrachenta |
 
 ## kraje
-| Kolumna | Typ       | Opis                                                                               |
-|---------|-----------|------------------------------------------------------------------------------------|
+| Kolumna | Typ | Opis |
+|---------|-----|------|
 | Skrot   | char(2)   | 2-znakowy skrót nazwy kraju |
 | Nazwa   | char(70)  | Pełna nazwa kraju |
 
 ## kurs_euro
-| Kolumna | Typ       | Opis                                                                               |
-|---------|-----------|------------------------------------------------------------------------------------|
+| Kolumna | Typ | Opis |
+|---------|-----|------|
 | Data    | date         | Data wprowadzenia obecnego kursy euro |
 | Kurs    | decimal(6,4) | Kurs euro |
 
 ## simc
-| Kolumna | Typ       | Opis                                                                               |
-|---------|-----------|------------------------------------------------------------------------------------|
+| Kolumna | Typ | Opis |
+|---------|-----|------|
 | IdMiejscowosci | char(6) | Id miejscowości w Rejestrze Teryt, system SIMC (https://eteryt.stat.gov.pl/eTeryt/rejestr_teryt/udostepnianie_danych/baza_teryt/uzytkownicy_indywidualni/pobieranie/pliki_pelne.aspx?contrast=default) |
 
 ## status_zamowienia
-| Kolumna | Typ       | Opis                                                                               |
-|---------|-----------|------------------------------------------------------------------------------------|
+| Kolumna | Typ | Opis |
+|---------|-----|------|
 | Id           | int(11)  | Unikatowy identyfikator statusu |
 | NazwaStatusu | char(50) | Nazwa statusu |
 
 ## uprawnienia
-| Kolumna | Typ       | Opis                                                                               |
-|---------|-----------|------------------------------------------------------------------------------------|
+| Kolumna | Typ | Opis |
+|---------|-----|------|
 | Id           | int(11)   | Unikatowy Identyfikator uprawnienia |
 | Nazwa        | char(255) | Nazwa uprawnienia |
 | MocUprawnien | int(11)   | Moc uprawnienia 1 - podglad, 2 - dodawanie, 3 - podgląd i dodawamoe, 4 - edycja i usuwanie, 7 - wszystkie uprawnienia |
 
 ## uslugi_pod_wydatkiem
-| Kolumna | Typ       | Opis                                                                               |
-|---------|-----------|------------------------------------------------------------------------------------|
+| Kolumna | Typ | Opis |
+|---------|-----|------|
 | WydatekId     | int(11)      | Identyfikator wydatku |
 | KodCPV        | char(10)     | Klucz obcy do kodu do tabeli [cpv] |
 | Netto         | decimal(7,2) | Cena netto wydatku w zł |
@@ -102,8 +102,8 @@ Zastosowano słowniki województw, powiatów, gmin, miejscowości i ulic wg bazy
 | KursEuroWDniu | date         | Data pobranego kursu euro. Klucz obcy do tabeli [kurs_euro] |
 
 ## uzytkownicy
-| Kolumna | Typ       | Opis                                                                               |
-|---------|-----------|------------------------------------------------------------------------------------|
+| Kolumna | Typ | Opis |
+|---------|-----|------|
 | Login         | char(50)   | Unikalna nazwa użytkownika używana do logowania do systemu |
 | Hash          | char(255)  | Hasło użytkownika zahashowane dla bezpieczeństwa |
 | Imie          | char(50)   | Imię użytkownika |
@@ -114,8 +114,8 @@ Zastosowano słowniki województw, powiatów, gmin, miejscowości i ulic wg bazy
 | Aktywne       | tinyint(1) | Czy konto nie zostało wyłączone |
 
 ## wydatki
-| Kolumna | Typ       | Opis                                                                               |
-|---------|-----------|------------------------------------------------------------------------------------|
+| Kolumna | Typ | Opis |
+|---------|-----|------|
 | Id               | int(11)   | Unikalny identyfikator wydatku |
 | WprowadzonePrzez | char(50)  | Urzytkownik, który wprowadził zamówienie do bazy. Klucz obcy bazy [uzytkownicy] |
 | NazwaWydatku     | char(255) | Nazwa wydatku, powinna krótko i dokładnie opisywać wydatek. |
@@ -123,14 +123,14 @@ Zastosowano słowniki województw, powiatów, gmin, miejscowości i ulic wg bazy
 | KontrahentId     | int(11)   | Klucz obcy z tabeli [identyfikatory_kontrahentow] |
 
 ## wydatki_pod_zamowieniem
-| Kolumna | Typ       | Opis                                                                               |
-|---------|-----------|------------------------------------------------------------------------------------|
+| Kolumna | Typ | Opis |
+|---------|-----|------|
 | ZamowienieId | int(11) | Identyfikator zamówienia |
 | WydatekId    | int(11) | Wydatki pędące pod konkretnym zamówieniem |
 
 ## zamowienia
-| Kolumna | Typ       | Opis                                                                               |
-|---------|-----------|------------------------------------------------------------------------------------|
+| Kolumna | Typ | Opis |
+|---------|-----|------|
 | Id                        | int(11)      | Unikatowy identyfikator zamówienia |
 | WprowadzonePrzez          | char(50)     | Urzytkownik, który wprowadził zamówienie do bazy. Klucz obcy bazy [uzytkownicy] |
 | NumerZamowienia           | char(50)     | Numer zamówienia, bądź umowy jaka widneje na dokumencie |

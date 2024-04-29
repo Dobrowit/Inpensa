@@ -126,7 +126,7 @@ _`Klucz obcy`_
 | NumerFaktury         | char(255)                | Numer faktury |
 | NazwaWydatku         | char(255)                | Nazwa wydatku, powinna krótko i dokładnie opisywać wydatek |
 | PodstawaPrawna       | char(255) Domyślnie NULL | Podstawa prawna wydatku. Może zawierać odniesienia do konkretnych przepisów prawa, na podstawie których dokonano wydatku |
-| DataWydatku          | date                     | Data wydatku |
+| DataWydatku          | date Domyślnie NULL      | Data wydatku |
 | _`KontrahentId`_     | int(11)                  | Klucz obcy z tabeli **[identyfikatory_kontrahentow]** |
 
 ## wydatki_pod_zamowieniem

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2024 at 02:27 PM
+-- Generation Time: Apr 29, 2024 at 01:33 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -407,6 +407,7 @@ CREATE TABLE `uslugi_pod_wydatkiem` (
 --
 
 CREATE TABLE `uzytkownicy` (
+  `Id` int(11) NOT NULL,
   `Login` char(50) NOT NULL COMMENT 'Unikalna nazwa użytkownika używana do logowania do systemu',
   `Hash` char(255) NOT NULL COMMENT 'Hasło użytkownika zahashowane dla bezpieczeństwa',
   `Imie` char(50) NOT NULL COMMENT 'Imię użytkownika\r\n',
@@ -418,11 +419,11 @@ CREATE TABLE `uzytkownicy` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 --
--- Dumping data for table `uzytkownicy`
+-- Dumping data for table `Uzytkownicy`
 --
 
-INSERT INTO `uzytkownicy` (`Login`, `Hash`, `Imie`, `Nazwisko`, `Mail`, `Telefon`, `MocUprawnienia`, `Aktywne`) VALUES
-('system', '92ea4d84852fea60d6b9f3b3716b52936b0555b58246fd4a51625a9026039481', 'system', 'system', NULL, NULL, 7, 1);
+INSERT INTO `uzytkownicy` (`Id`, `Login`, `Hash`, `Imie`, `Nazwisko`, `Mail`, `Telefon`, `MocUprawnienia`, `Aktywne`) VALUES
+('0', 'system', '92ea4d84852fea60d6b9f3b3716b52936b0555b58246fd4a51625a9026039481', 'system', 'system', NULL, NULL, '7', '1');
 
 -- --------------------------------------------------------
 
@@ -435,9 +436,9 @@ CREATE TABLE `wydatki` (
   `NumerFaktury` char(255) NOT NULL COMMENT 'Numer faktury',
   `NazwaWydatku` char(255) NOT NULL COMMENT 'Nazwa wydatku, powinna krótko i dokładnie opisywać wydatek.',
   `PodstawaPrawna` char(255) DEFAULT NULL COMMENT 'Podstawa prawna wydatku. Może zawierać odniesienia do konkretnych przepisów prawa, na podstawie których dokonano wydatku.',
-  `DataWydatku` date NOT NULL,
+  `DataWydatku` date DEFAULT NULL,
   `KontrahentId` int(11) NOT NULL COMMENT ' Klucz obcy z tabeli [identyfikatory_kontrahentow]',
-  `WprowadzonePrzez` char(50) NOT NULL COMMENT 'Urzytkownik, który wprowadził zamówienie do bazy. Klucz obcy bazy [uzytkownicy]'
+  `UzytkownikId` int(11) NOT NULL COMMENT 'Uzytkownik, który wprowadził zamówienie do bazy. Klucz obcy bazy [uzytkownicy]'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 -- --------------------------------------------------------
@@ -537,7 +538,8 @@ ALTER TABLE `uslugi_pod_wydatkiem`
 -- Indeksy dla tabeli `uzytkownicy`
 --
 ALTER TABLE `uzytkownicy`
-  ADD PRIMARY KEY (`Login`),
+  ADD PRIMARY KEY (`Id`),
+  ADD UNIQUE KEY `Login` (`Login`),
   ADD KEY `UprawnienieId` (`MocUprawnienia`);
 
 --
@@ -545,8 +547,8 @@ ALTER TABLE `uzytkownicy`
 --
 ALTER TABLE `wydatki`
   ADD PRIMARY KEY (`Id`),
-  ADD KEY `WprowadzonePrzez` (`WprowadzonePrzez`),
-  ADD KEY `KontrahentId` (`KontrahentId`);
+  ADD KEY `KontrahentId` (`KontrahentId`),
+  ADD KEY `wydatki_ibfk_1` (`UzytkownikId`);
 
 --
 -- Indeksy dla tabeli `wydatki_pod_zamowieniem`
@@ -572,13 +574,19 @@ ALTER TABLE `zamowienia`
 -- AUTO_INCREMENT for table `identyfikatory_kontrahentow`
 --
 ALTER TABLE `identyfikatory_kontrahentow`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unikalny indetyfikator', AUTO_INCREMENT=2048;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unikalny indetyfikator', AUTO_INCREMENT=2198;
+
+--
+-- AUTO_INCREMENT for table `uzytkownicy`
+--
+ALTER TABLE `uzytkownicy`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `wydatki`
 --
 ALTER TABLE `wydatki`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unikalny identyfikator wydatku';
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unikalny identyfikator wydatku', AUTO_INCREMENT=32774;
 
 --
 -- AUTO_INCREMENT for table `zamowienia`
@@ -586,54 +594,6 @@ ALTER TABLE `wydatki`
 ALTER TABLE `zamowienia`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unikatowy identyfikator zamówienia';
 
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `kontrahenci`
---
-ALTER TABLE `kontrahenci`
-  ADD CONSTRAINT `kontrahenci_ibfk_1` FOREIGN KEY (`IdMiejscowosci`) REFERENCES `simc` (`IdMiejscowosci`),
-  ADD CONSTRAINT `kontrahenci_ibfk_2` FOREIGN KEY (`KontrahentId`) REFERENCES `identyfikatory_kontrahentow` (`Id`),
-  ADD CONSTRAINT `kontrahenci_ibfk_3` FOREIGN KEY (`SkrotNazwyKraju`) REFERENCES `kraje` (`Skrot`);
-
---
--- Constraints for table `uslugi_pod_wydatkiem`
---
-ALTER TABLE `uslugi_pod_wydatkiem`
-  ADD CONSTRAINT `uslugi_pod_wydatkiem_ibfk_1` FOREIGN KEY (`KodCPV`) REFERENCES `cpv` (`Kod`),
-  ADD CONSTRAINT `uslugi_pod_wydatkiem_ibfk_2` FOREIGN KEY (`KursEuroWDniu`) REFERENCES `kurs_euro` (`Data`),
-  ADD CONSTRAINT `uslugi_pod_wydatkiem_ibfk_3` FOREIGN KEY (`WydatekId`) REFERENCES `wydatki` (`Id`);
-
---
--- Constraints for table `uzytkownicy`
---
-ALTER TABLE `uzytkownicy`
-  ADD CONSTRAINT `uzytkownicy_ibfk_1` FOREIGN KEY (`MocUprawnienia`) REFERENCES `uprawnienia` (`MocUprawnien`);
-
---
--- Constraints for table `wydatki`
---
-ALTER TABLE `wydatki`
-  ADD CONSTRAINT `wydatki_ibfk_1` FOREIGN KEY (`WprowadzonePrzez`) REFERENCES `uzytkownicy` (`Login`),
-  ADD CONSTRAINT `wydatki_ibfk_2` FOREIGN KEY (`KontrahentId`) REFERENCES `identyfikatory_kontrahentow` (`Id`);
-
---
--- Constraints for table `wydatki_pod_zamowieniem`
---
-ALTER TABLE `wydatki_pod_zamowieniem`
-  ADD CONSTRAINT `wydatki_pod_zamowieniem_ibfk_1` FOREIGN KEY (`WydatekId`) REFERENCES `wydatki` (`Id`),
-  ADD CONSTRAINT `wydatki_pod_zamowieniem_ibfk_2` FOREIGN KEY (`ZamowienieId`) REFERENCES `zamowienia` (`Id`);
-
---
--- Constraints for table `zamowienia`
---
-ALTER TABLE `zamowienia`
-  ADD CONSTRAINT `zamowienia_ibfk_1` FOREIGN KEY (`WprowadzonePrzez`) REFERENCES `uzytkownicy` (`Login`),
-  ADD CONSTRAINT `zamowienia_ibfk_2` FOREIGN KEY (`StatusZamowieniaId`) REFERENCES `status_zamowienia` (`Id`),
-  ADD CONSTRAINT `zamowienia_ibfk_3` FOREIGN KEY (`KursEuroWDniu`) REFERENCES `kurs_euro` (`Data`),
-  ADD CONSTRAINT `zamowienia_ibfk_4` FOREIGN KEY (`Id`) REFERENCES `wydatki_pod_zamowieniem` (`ZamowienieId`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

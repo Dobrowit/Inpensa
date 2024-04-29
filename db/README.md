@@ -109,7 +109,8 @@ _`Klucz obcy`_
 ## uzytkownicy
 | Kolumna | Typ | Opis |
 |---------|-----|------|
-| **`Login`**       | char(50)                 | Unikalna nazwa użytkownika używana do logowania do systemu |
+| **`Id`**          | Int                      | Unikalna nazwa użytkownika używana do logowania do systemu |
+| Login             | char(50) Unique          | Unikalna nazwa użytkownika używana do logowania do systemu |
 | Hash              | char(255)                | Hasło użytkownika zahashowane dla bezpieczeństwa |
 | Imie              | char(50)                 | Imię użytkownika |
 | Nazwisko          | char(50)                 | Nazwisko użytkownika |

@@ -11,9 +11,16 @@ Rejestr i kontrola wydatków wg kodów CPV.
  - wielodostępność, grupowanie pracowników, przydzielanie uprawnień
  - logowanie domenowe
 
-## Zależności
+## Technologie
 - Python (https://www.python.org)
-- Django (https://www.djangoproject.com) lub Flask (https://flask.palletsprojects.com/en/3.0.x/)
+- Django (https://www.djangoproject.com)
 - SQLAlchemy (https://www.sqlalchemy.org/)
-- MySQL/MariaDB (https://www.mysql.com, https://mariadb.org) lub PostgreSQL (https://www.postgresql.org/)
+- MySQL/MariaDB (https://www.mysql.com, https://mariadb.org)
 - phpMyAdmin  (https://www.phpmyadmin.net) - tylko do projektowania db
+
+lub
+
+- PostgreSQL (https://www.postgresql.org/)
+- Python (https://www.python.org)
+- Flask (https://flask.palletsprojects.com/en/3.0.x/)
+- SQLAlchemy (https://www.sqlalchemy.org/)

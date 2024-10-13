@@ -13,6 +13,7 @@ Rejestr i kontrola wydatków wg kodów CPV.
 
 ## Zależności
 - Python (https://www.python.org)
-- Django (https://www.djangoproject.com)
-- MySQL/MariaDB (https://www.mysql.com, https://mariadb.org)
+- Django (https://www.djangoproject.com) lub Flask (https://flask.palletsprojects.com/en/3.0.x/)
+- SQLAlchemy (https://www.sqlalchemy.org/)
+- MySQL/MariaDB (https://www.mysql.com, https://mariadb.org) lub PostgreSQL (https://www.postgresql.org/)
 - phpMyAdmin  (https://www.phpmyadmin.net) - tylko do projektowania db
